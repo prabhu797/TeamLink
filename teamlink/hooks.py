@@ -213,3 +213,5 @@ app_license = "MIT"
 # auth_hooks = [
 # 	"teamlink.auth.validate"
 # ]
+
+website_route_rules = [{'from_route': '/TaskHive/<path:app_path>', 'to_route': 'TaskHive'},]
