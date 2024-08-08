@@ -6,27 +6,31 @@ import {
     FormControlLabel,
     Button,
     Stack,
-    Checkbox
+    Checkbox,
+    IconButton,
+    Alert
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Snackbar from '@mui/material/Snackbar';
+
+import { useNavigate } from 'react-router-dom';
+
+import { useFrappeAuth } from 'frappe-react-sdk';
 
 import CustomTextField from 'src/components/forms/theme-elements/CustomTextField';
-import { useFrappeAuth } from 'frappe-react-sdk';
 
 const AuthPage = ({ title, subtitle, subtext }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const [toastMessage, setToastMessage] = useState("")
+    const [severity, setSeverity] = useState("info")
+
+    const navigate = useNavigate();
 
     const {
         currentUser,
-        isValidating,
-        isLoading,
         login,
-        logout,
-        error,
-        updateCurrentUser,
-        getUserCookie,
     } = useFrappeAuth();
 
     const handleSignIn = () => {
@@ -34,15 +38,27 @@ const AuthPage = ({ title, subtitle, subtext }) => {
         console.log(password);
         login({ username: username, password: password })
             .then((res) => {
-                console.log(res.message);
+                setOpen(true);
+                setToastMessage("Logged in successfully..!");
+                setSeverity("success");
+                setTimeout(() => {
+                    // navigate("/");
+                }, 2000);
             })
             .catch((err) => {
                 console.log(err);
+                setOpen(true);
+                setToastMessage(err.message);
+                setSeverity("error");
             });
     }
 
-    console.log("currentUser = ", currentUser);
-    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     return (
         <>
@@ -54,7 +70,7 @@ const AuthPage = ({ title, subtitle, subtext }) => {
 
             {subtext}
 
-            <Stack my={2}>
+            <Stack my={4}>
                 <Box>
                     <Typography variant="subtitle1"
                         fontWeight={600} component="label" htmlFor='username' mb="5px">Username</Typography>
@@ -67,7 +83,7 @@ const AuthPage = ({ title, subtitle, subtext }) => {
                     <CustomTextField id="password" type="password" variant="outlined" fullWidth value={password}
                         onChange={(e) => setPassword(e.target.value)} />
                 </Box>
-                <Stack justifyContent="space-between" direction="row" alignItems="center" my={2}>
+                {/* <Stack justifyContent="space-between" direction="row" alignItems="center" my={2}>
                     <FormGroup>
                         <FormControlLabel
                             control={<Checkbox defaultChecked />}
@@ -85,7 +101,7 @@ const AuthPage = ({ title, subtitle, subtext }) => {
                     >
                         Forgot Password ?
                     </Typography>
-                </Stack>
+                </Stack> */}
             </Stack>
             <Box>
                 <Button
@@ -93,8 +109,6 @@ const AuthPage = ({ title, subtitle, subtext }) => {
                     variant="contained"
                     size="large"
                     fullWidth
-                    component={Link}
-                    to="/"
                     type="submit"
                     onClick={handleSignIn}
                 >
@@ -102,6 +116,22 @@ const AuthPage = ({ title, subtitle, subtext }) => {
                 </Button>
             </Box>
             {subtitle}
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                key={"topright"}
+                open={open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity={severity}
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    {toastMessage}
+                </Alert>
+            </Snackbar>
         </>
     )
 

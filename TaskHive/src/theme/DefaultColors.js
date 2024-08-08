@@ -65,9 +65,19 @@ const baselightTheme = createTheme({
     divider: '#e5eaef',
   },
   typography,
-  shadows
+  shadows,
+  components: {
+    MuiAlert: {
+      styleOverrides: {
+        filledSuccess: {
+          backgroundColor: '#4CAF50',
+          color: '#FFFFFF',
+        },
+      },
+    },
+  },
 },
-  
+
 );
 
 export { baselightTheme };
