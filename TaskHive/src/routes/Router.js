@@ -16,6 +16,9 @@ const Error = Loadable(lazy(() => import('../views/authentication/Error')));
 const Register = Loadable(lazy(() => import('../views/authentication/Register')));
 const Login = Loadable(lazy(() => import('../views/authentication/Login')));
 
+const LoginPage = Loadable(lazy(() => import('src/devComponents/login/LoginPage')));
+// import LoginPage from 'src/devComponents/login/LoginPage';
+
 const Router = [
   {
     path: '/',
@@ -37,6 +40,7 @@ const Router = [
       { path: '404', element: <Error /> },
       { path: '/auth/register', element: <Register /> },
       { path: '/auth/login', element: <Login /> },
+      { path: '/auth/login1', element: <LoginPage /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },

@@ -8,7 +8,7 @@ import svgr from '@svgr/rollup'
 export default defineConfig({
 	plugins: [svgr(), react()],
 	server: {
-		port: 8080,
+		port: 3000,
 		proxy: proxyOptions
 	},
 	resolve: {
