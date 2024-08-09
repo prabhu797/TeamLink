@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button } from '@mui/material';
+import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
 // components
@@ -43,7 +43,11 @@ const Header = (props) => {
           <IconMenu width="20" height="20" />
         </IconButton>
 
-
+        <Box flexGrow={1} >
+          <Typography variant='h2'>
+            Pre-Sales Dashboard
+          </Typography>
+        </Box>
         <IconButton
           size="large"
           aria-label="show 11 new notifications"
@@ -61,11 +65,10 @@ const Header = (props) => {
           </Badge>
 
         </IconButton>
-        <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Button variant="contained" color="primary"  target="_blank" href="https://adminmart.com/product/modernize-react-mui-dashboard-template/">
+          {/* <Button variant="contained" color="primary"  target="_blank" href="https://adminmart.com/product/modernize-react-mui-dashboard-template/">
             Upgrade to Pro
-          </Button>
+          </Button> */}
           <Profile />
         </Stack>
       </ToolbarStyled>

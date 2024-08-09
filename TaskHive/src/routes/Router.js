@@ -1,6 +1,11 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
+import LeadsInfo from 'src/custom/leadsInfo/LeadsInfo';
+import FollowUpToday from 'src/custom/followUpToday/FollowUpToday';
+import MissedFollowUp from 'src/custom/missedFollowUp/MissedFollowUp';
+import OTBooking from 'src/custom/otBooking/OTBooking';
+import LeadTracker from 'src/custom/leadTracker/LeadTracker';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -25,6 +30,11 @@ const Router = [
     children: [
       { path: '/', element: <Navigate to="/dashboard" /> },
       { path: '/dashboard', exact: true, element: <Dashboard /> },
+      { path: '/leads-info', exact: true, element: <LeadsInfo /> },
+      { path: '/follow-up-today', exact: true, element: <FollowUpToday /> },
+      { path: '/missed-follow-up', exact: true, element: <MissedFollowUp /> },
+      { path: '/ot-booking', exact: true, element: <OTBooking /> },
+      { path: '/lead-tracker', exact: true, element: <LeadTracker /> },
       { path: '/sample-page', exact: true, element: <SamplePage /> },
       { path: '/icons', exact: true, element: <Icons /> },
       { path: '/ui/typography', exact: true, element: <TypographyPage /> },

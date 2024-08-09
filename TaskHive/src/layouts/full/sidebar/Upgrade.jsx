@@ -12,9 +12,14 @@ export const Upgrade = () => {
         >
             <>
                 <Box>
-                    <Typography variant="h6" mb={1}>Unlimited Access</Typography>
-                    <Button color="primary" target="_blank" href="https://adminmart.com/product/modernize-react-mui-dashboard-template/" variant="contained" aria-label="logout" size="small">
-                        Upgrade
+                    <Typography variant="h6" mb={1}>Connect with the team</Typography>
+                    <Button
+                        color="primary"
+                        href="slack://"
+                        variant="contained"
+                        aria-label="logout"
+                        size="small">
+                        Connect
                     </Button>
                 </Box>
                 <Box mt="-35px">
